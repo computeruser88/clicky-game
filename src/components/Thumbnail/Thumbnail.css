@@ -1,7 +1,14 @@
 div.thumbnail {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;
-    padding-top: 100%;
+    width: 200px;
+    height: 200px;
+    transition-duration: 0.4s;
+    position: relative;
+    float: left;
+    margin: 30px;
   }
+
+div.thumbnail:hover {
+  transform: scale(1.02);
+}

@@ -1,6 +1,9 @@
 import React from "react";
+import "./ButtonList.css";
 
 // RecipeList renders a bootstrap list item
-export const ButtonList = props => (
-  <ul className="list-group">{props.children}</ul>
+const ButtonList = props => (
+  <div className="button-list">{props.children}</div>
 );
+
+export default ButtonList;

@@ -1,4 +1,8 @@
-nav {
+.navbar {
+    background: orange;
+    font-family: 'EB Garamond', serif;
+}
+.navbar-brand {
+    background: orange;
     color: brown;
-    background-color: orange;
 }
