@@ -4,4 +4,4 @@ The object of this game is to click all the characters, but not more than once! 
 
 Technologies used: React, JSX, ES6, Babel, Webpack, HTML, JavaScript, CSS, Heroku
 
-* Play the game here: https://gentle-woodland-77584.herokuapp.com/
+Play the game here: https://gentle-woodland-77584.herokuapp.com/
