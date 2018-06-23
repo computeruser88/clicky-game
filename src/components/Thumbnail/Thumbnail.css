@@ -1,8 +1,8 @@
 div.thumbnail {
     background-size: cover;
     background-repeat: no-repeat;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     transition-duration: 0.4s;
     position: relative;
     float: left;
