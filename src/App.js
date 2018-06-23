@@ -16,115 +16,132 @@ import Mountain from "./images/mountain.JPG";
 import NightKing from "./images/night-king.JPG";
 import Tyrion from "./images/tyrion-lannister.JPG";
 import Yara from "./images/yara.JPG";
-import { _ } from 'underscore';
+
 
 class App extends Component {
-  state = {
-    buttons: [
-      {
-        imageSource: Arya,
-        isClicked: false
-      },
-      {
-        imageSource: Brienne,
-        isClicked: false
-      },
-      {
-        imageSource: Cersei,
-        isClicked: false
-      },
-      {
-        imageSource: Dany,
-        isClicked: false
-      },
-      {
-        imageSource: Gendry,
-        isClicked: false
-      },
-      {
-        imageSource: Hound,
-        isClicked: false
-      },
-      {
-        imageSource: Jaime,
-        isClicked: false
-      },
-      {
-        imageSource: Jon,
-        isClicked: false
-      },
-      {
-        imageSource: Mountain,
-        isClicked: false,
-        isRendered: false
-      },
-      {
-        imageSource: NightKing,
-        isClicked: false,
-        isRendered: false
-      },
-      {
-        imageSource: Tyrion,
-        isClicked: false,
-        isRendered: false
-      },
-      {
-        imageSource: Yara,
-        isClicked: false,
-        isRendered: false
-      }
-    ],
-    score: 0,
-    highScore: 0,
-    userMessage: "Click any picture to begin!"
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      buttons: [
+        {
+          id: 0,
+          imageSource: Arya
+        },
+        {
+          id: 1,
+          imageSource: Brienne
+        },
+        {
+          id: 2,
+          imageSource: Cersei
+        },
+        {
+          id: 3,
+          imageSource: Dany
+        },
+        {
+          id: 4,
+          imageSource: Gendry
+        },
+        {
+          id: 5,
+          imageSource: Hound
+        },
+        {
+          id: 6,
+          imageSource: Jaime
+        },
+        {
+          id: 7,
+          imageSource: Jon
+        },
+        {
+          id: 8,
+          imageSource: Mountain
+        },
+        {
+          id: 9,
+          imageSource: NightKing
+        },
+        {
+          id: 10,
+          imageSource: Tyrion
+        },
+        {
+          id: 11,
+          imageSource: Yara
+        }
+      ],
+      score: 0,
+      highScore: 0,
+      userMessage: "Click any picture to begin!",
+      isClicked: [false, false, false, false, false, false, false, false, false, false, false, false]
+    };
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.shuffleButtons(this.state);
+  }
 
   handleButtonClick = event => {
-    event.preventDefault();
-    const isGameOver = event.target.isClicked ? true : false; // game is over when an image is clicked twice
-    if (!isGameOver) {
-      this.setState({
-        isClicked: true,
-        userMessage: "You guessed correctly!",
-        score: this.score + 1
-      });
-      if (this.state.score > this.state.highScore) {
+    console.log(event.target.id);
+    if (this.state.isClicked[event.target.id]) {
+      if (this.state.score >= this.state.highScore) {
         this.setState({
-          highScore: this.score
+          highScore: this.state.score
         });
       }
-    } else {
+      const resetIsClickedArray = [false, false, false, false, false, false, false, false, false, false, false, false];
       this.setState({
         score: 0,
-        userMessage: "You guessed incorrectly!"
+        userMessage: "You guessed incorrectly!",
+        isClicked: resetIsClickedArray
       });
-      this.state.buttons.forEach(button => {
-        button.setState({
-          isClicked: false,
-          isRendered: false
-        });
+    } else {
+      let currentScore = this.state.score;
+      currentScore++;
+      console.log(this.state.score);
+      let tempIsClicked = this.state.isClicked;
+      tempIsClicked[event.target.id] = true;
+      this.setState({
+        isClicked: tempIsClicked,
+        userMessage: "You guessed correctly!",
+        score: currentScore
       });
     }
+    this.shuffleButtons(this.state);
+  }
 
-    // shuffle buttons
-    _.shuffle(this.state.buttons);
-    this.showButtons(this.state.buttons);
+  shuffleButtons = props => {
+    let buttonArray = props.buttons;
+    for (var i = buttonArray.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = buttonArray[i];
+      buttonArray[i] = buttonArray[j];
+      buttonArray[j] = temp;
+    }
+    this.setState({
+      buttons: buttonArray
+    });
+    console.log(this.state.buttons);
+    this.showButtons(props);
   }
 
   showButtons = props =>
-    props.map(button =>
-      <div>
-        <Thumbnail src={button.imageSource} onClick={this.handleButtonClick} />
-      </div>
-    )
+    props.buttons.map(button =>
+      <Thumbnail key={button.id} id={button.id} src={button.imageSource} 
+      isClicked={this.state.isClicked[button.id]}
+       click={this.handleButtonClick} />
+    );
 
   render() {
     return (
       <div>
-        <Nav user-message={this.state.userMessage} current-score={this.state.score} top-score={this.state.highScore} />
-        <Jumbotron />
-        <ButtonList>
-          {this.showButtons(this.state.buttons)}
+        <Nav key="12" userMessage={this.state.userMessage} currentScore={this.state.score} topScore={this.state.highScore} />
+        <Jumbotron key="13" />
+        <ButtonList key="14">
+          {this.showButtons(this.state)}
         </ButtonList>
       </div>
     );

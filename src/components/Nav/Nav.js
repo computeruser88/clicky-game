@@ -1,16 +1,13 @@
 import React from "react";
 import "./Nav.css";
 
-const Nav = () => (
+const Nav = (props) => (
     <nav className="navbar">
         <a className="navbar-brand" href="/">
             Clicky Game - Game of Thrones Edition
     </a>
-        <span className="user-message"></span>
-        <span>Score:
-        <span className="current-score"></span>  Top Score: <span className="top-score">
-            </span>
-        </span>
+        <span className="user-message">{props.userMessage}</span>
+        <span className="score-line">Score: {props.currentScore} | Top Score: {props.topScore}</span>
     </nav>
 );
 

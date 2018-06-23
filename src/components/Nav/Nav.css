@@ -1,7 +1,14 @@
 .navbar {
     background: orange;
     font-family: 'EB Garamond', serif;
+    font-weight: normal;
+    font-size: 14px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5;  
 }
+
 .navbar-brand {
     background: orange;
     color: brown;
