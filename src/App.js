@@ -75,7 +75,7 @@ class App extends Component {
       score: 0,
       highScore: 0,
       userMessage: "Click any picture to begin!",
-      isClicked: [false, false, false, false, false, false, false, false, false, false, false, false]
+      isClicked: []
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
