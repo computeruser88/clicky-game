@@ -92,7 +92,7 @@ class App extends Component {
           highScore: this.state.score
         });
       }
-      const resetIsClickedArray = [false, false, false, false, false, false, false, false, false, false, false, false];
+      const resetIsClickedArray = new Array(12).fill(false);
       this.setState({
         score: 0,
         userMessage: "You guessed incorrectly!",
